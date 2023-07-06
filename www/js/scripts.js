@@ -62,6 +62,11 @@ const HTML_IMPORTS = {
   "sb-admin-js": {
     type: JS,
     src: "js/sb-admin.js"
+  },
+  "common-css": {
+    type: CSS,
+    href: "css/styles.css",
+    rel: "stylesheet",
   }
 };
 

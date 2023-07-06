@@ -14,11 +14,19 @@
 
     <script src="js/scripts.js"></script>
     <script>
-        var headerImport = importCssAndJs(['simple-datatables-css', 'fontawesome-js', 'monaca-css', 'sb-admin-css', 'monaca-js', 'layouts-js'], true);
+        var headerImport = importCssAndJs(['simple-datatables-css', 'fontawesome-js', 'monaca-css', 'sb-admin-css', 'monaca-js', 'layouts-js', 'common-css'], true);
     </script>
 </head>
 
 <body class="sb-nav-fixed">
+    <div id="spinner" class="spinner">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="spinner-grow" style="width: 10rem; height: 10rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
         </div>
@@ -586,6 +594,7 @@
             initLayout();
             await Promise.all(importCssAndJs(['bootstrap-js', 'chart-js', 'simple-datatable-js'], false));
             await Promise.all(importCssAndJs(['sb-admin-js', 'chart-area-demo-js', 'chart-bar-demo-js', 'simple-datatable-demo-js'], false));
+            document.querySelector('#spinner').classList.add('d-none');
         })();
     </script>
 </body>
