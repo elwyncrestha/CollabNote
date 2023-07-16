@@ -12,21 +12,8 @@ import './sb-admin';
 import './simple-datatables';
 
 // CollabNote
-import './layouts';
+import { RouteGuard } from './core/guards';
+import { Layout } from  './pages/common';
 
-var appState = {};
-
-var setupDOMContentLoadedListener = (logic) => {
-  if (appState.DOMContentLoaded) {
-    logic();
-  } else {
-    window.addEventListener('DOMContentLoaded', () => logic());
-  }
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  appState.DOMContentLoaded = true;
-});
-
-document.querySelector('#spinner').classList.add('d-none');
-document.querySelector('#layoutSidenav').classList.remove('d-none');
+RouteGuard.default();
+Layout.default();

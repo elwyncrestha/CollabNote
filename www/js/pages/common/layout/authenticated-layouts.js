@@ -26,7 +26,7 @@ const navbarLayout = `
   </nav>
 `;
 
-var initNavbar = () => {
+const initNavbar = () => {
   const navbarEl = document.createElement('div');
   navbarEl.innerHTML = navbarLayout;
   document.body.insertBefore(navbarEl, document.body.firstChild);
@@ -102,8 +102,8 @@ const sidenavLayout = `
   </nav>
 `;
 
-var initSidenav = () =>
-  (document.querySelector("#layoutSidenav_nav").innerHTML += sidenavLayout);
+const initSidenav = () =>
+    (document.querySelector("#layoutSidenav_nav").innerHTML += sidenavLayout);
 
 const footerLayout = `
   <footer class="py-4 bg-light mt-auto">
@@ -120,16 +120,24 @@ const footerLayout = `
   </footer>
 `;
 
-var initFooter = () => {
+const initFooter = () => {
   document.querySelector("#layoutSidenav_content").innerHTML += footerLayout;
   const footerDate = document.body.querySelector("#footerDate");
-  footerDate.textContent = new Date().getFullYear();
+  footerDate.textContent = new Date().getFullYear().toString();
 };
 
-var initLayout = () => {
+const removeSpinner = () => {
+  document.querySelector('#spinner').classList.add('d-none');
+  const classList = document.querySelector('#layoutSidenav').classList;
+  classList.remove('d-none');
+  classList.add('d-flex');
+}
+
+const init = () => {
   initNavbar();
   initSidenav();
   initFooter();
+  removeSpinner();
 };
 
-initLayout();
+export default init;
