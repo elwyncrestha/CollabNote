@@ -1,14 +1,20 @@
 {
-  "name": "monaca-template-minimum",
-  "version": "3.0.1",
-  "displayName": "Monaca Template Minimum",
+  "name": "CollabNote",
+  "version": "1.0.0",
+  "displayName": "CollabNote",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "bootstrap": "^5.3.0",
     "cordova-plugin-splashscreen": "6.0.0",
-    "monaca-plugin-monaca-core": "3.3.1"
+    "monaca-plugin-monaca-core": "3.3.1",
+    "simple-datatables": "^7.3.0"
   },
   "scripts": {
     "monaca:preview": "npm run dev",
-    "dev": "browser-sync start -s www/ --watch --port 8080 --ui-port 8081"
+    "dev": "browser-sync start -s www/ --watch --port 8080 --ui-port 8081",
+    "build": "npm run clean && npx webpack",
+    "build:dev": "npx webpack --watch",
+    "clean": "rimraf www/dist"
   },
   "cordova": {
     "plugins": {
@@ -17,7 +23,20 @@
     }
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.14",
     "browser-sync": "~2.27.7",
-    "cordova": "^11.0.0"
+    "cordova": "^11.0.0",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss": "^8.4.26",
+    "postcss-loader": "^7.3.3",
+    "postcss-preset-env": "^9.0.0",
+    "rimraf": "^5.0.1",
+    "sass": "^1.63.6",
+    "sass-loader": "^13.3.2",
+    "terser-webpack-plugin": "^5.3.9",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
   }
 }
