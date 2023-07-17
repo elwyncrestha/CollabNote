@@ -4,6 +4,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
+  // mode: "development",
   mode: "production",
   entry: {
     "css/main.min.css": path.resolve(__dirname, "www", "css", "styles.scss"),

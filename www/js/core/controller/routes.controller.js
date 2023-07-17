@@ -5,7 +5,7 @@ function toLoginPage() {
 }
 
 function toRegisterPage() {
-    window.location.href = ROUTE_CONSTANT.L
+    window.location.href = ROUTE_CONSTANT.REGISTER;
 }
 
 function to(url) {

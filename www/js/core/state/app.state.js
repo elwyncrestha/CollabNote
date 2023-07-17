@@ -2,16 +2,45 @@
 
 const { APP_STATE_KEY } = APP_CONSTANT;
 
-let state = {
-    isAuthenticated: false,
+const CollabNoteState = {
+    authToken: null,
+    firebaseApp: null,
+    gaAnalytics: null,
 };
 
+function getState() {
+    // TODO: App state temporarily stored in the window object.
+    if (!window.CollabNoteState) {
+        window.CollabNoteState = CollabNoteState;
+    }
+
+    return window.CollabNoteState;
+}
+
+function setState(state) {
+    window.CollabNoteState = { ...state };
+}
+
+const serializableStateKeys = ['authToken'];
+
 function saveState() {
-    localStorage.setItem(APP_STATE_KEY, JSON.stringify(state));
+    const serialize = {};
+    const state = getState();
+    
+    serializableStateKeys.forEach(key => serialize[key] = state[key]);
+    localStorage.setItem(APP_STATE_KEY, JSON.stringify(serialize));
 }
 
 function restoreState() {
-    state = JSON.parse(localStorage.getItem(APP_STATE_KEY));
+    const deserialize = localStorage.getItem(APP_STATE_KEY);
+    if (!deserialize) {
+        return;
+    }
+
+    const state = getState();
+    const de = { ...state, ...JSON.parse(deserialize) };
+
+    setState(de);
 }
 
-export { state, saveState, restoreState };
+export { getState, setState, saveState, restoreState };

@@ -1,11 +1,9 @@
-﻿import { AppState } from '../../../core/state';
-import * as UnauthenticatedLayout from './unauthenticated-layouts';
+﻿import * as UnauthenticatedLayout from './unauthenticated-layouts';
 import * as AuthenticatedLayout from './authenticated-layouts';
-
-const { state: { isAuthenticated } } = AppState;
+import { AuthConfig } from '../../../core/config';
 
 export default function init() {
-    if (isAuthenticated) {
+    if (AuthConfig.isAuthenticated()) {
         AuthenticatedLayout.default();
     } else {
         UnauthenticatedLayout.default();

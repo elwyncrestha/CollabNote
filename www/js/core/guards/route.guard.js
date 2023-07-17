@@ -1,8 +1,7 @@
-﻿import { AppState } from '../state';
-import { RoutesController } from '../controller';
+﻿import { RoutesController } from '../controller';
 import { ROUTE_CONSTANT } from '../constants';
+import { AuthConfig } from '../config';
 
-const { state: { isAuthenticated } } = AppState;
 const { LOGIN, REGISTER, DASHBOARD } = ROUTE_CONSTANT;
 
 function getCurrentPage() {
@@ -13,13 +12,17 @@ function getCurrentPage() {
     return currentURL.substring(currentURL.lastIndexOf("/") + 1);
 }
 
+export function isPageActive(page) {
+    return getCurrentPage() === page;
+}
+
 function isCheckRequired() {
     const currentPage = getCurrentPage();
     return currentPage !== LOGIN && currentPage !== REGISTER;
 }
 
-function init() {
-    if (!isAuthenticated) {
+export function init() {
+    if (!AuthConfig.isAuthenticated()) {
         if (isCheckRequired()) {
             RoutesController.toLoginPage();
             return;
@@ -33,5 +36,3 @@ function init() {
         RoutesController.to(DASHBOARD);
     }
 }
-
-export default init;
