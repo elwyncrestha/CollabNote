@@ -8,36 +8,46 @@ import {getAnalytics} from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-async function fetchFirebaseConfig() {
+function fetchFirebaseConfig() {
+  return new Promise((resolve, reject) => {
     // Uses private Postman mock server to fetch the config dynamically.
-    const url = 'https://04f71abc-0789-4a51-9087-0d18c0b34dcf.mock.pstmn.io/config';
+    const url = "https://04f71abc-0789-4a51-9087-0d18c0b34dcf.mock.pstmn.io/config";
+    const xhr = new XMLHttpRequest();
 
-    try {
-        const response = await fetch(url);
+    xhr.open("GET", url, true);
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch Firebase configuration');
-        }
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        try {
+          const response = JSON.parse(xhr.responseText);
 
-        // Set the `firebaseConfig` property locally only if the config API is unavailable.
-        // This is done to not expose the API keys.
-        const firebaseConfig = {
+          // Set the `firebaseConfig` property locally only if the config API is unavailable.
+          // This is done to not expose the API keys.
+          const firebaseConfig = {
             apiKey: "",
             authDomain: "",
             projectId: "",
             storageBucket: "",
             messagingSenderId: "",
             appId: "",
-            measurementId: ""
-        };
+            measurementId: "",
+          };
 
-        const config = await response.json();
+          resolve({ ...firebaseConfig, ...response });
+        } catch (error) {
+          reject(new Error("Failed to parse Firebase configuration"));
+        }
+      } else {
+        reject(new Error("Failed to fetch Firebase configuration"));
+      }
+    };
 
-        return { ...firebaseConfig, ...config };
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return null;
-    }
+    xhr.onerror = function () {
+      reject(new Error("Error fetching data"));
+    };
+
+    xhr.send();
+  });
 }
 
 const { getState, setState } = AppState;
