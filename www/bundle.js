@@ -1,1 +1,0 @@
-(()=>{"use strict";var e={};window.addEventListener("DOMContentLoaded",(()=>{e.DOMContentLoaded=!0}))})();
