@@ -50,18 +50,10 @@ const sidenavLayout = `
           <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
               <nav class="sb-sidenav-menu-nested nav">
                   <a class="nav-link" href="note-editor.html">New Note</a>
-                  <a class="nav-link" href="">View Notes</a>
+                  <!-- TODO: Add separate page for View Notes -->
+                  <a class="nav-link" href="note-list.html">View Notes</a>
               </nav>
           </div>
-          <div class="sb-sidenav-menu-heading">Addons</div>
-          <a class="nav-link" href="charts.html">
-              <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-              Charts
-          </a>
-          <a class="nav-link" href="tables.html">
-              <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-              Tables
-          </a>
       </div>
   </div>
   <div class="sb-sidenav-footer">

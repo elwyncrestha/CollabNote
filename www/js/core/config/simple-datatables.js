@@ -1,10 +1,10 @@
 import { DataTable } from 'simple-datatables';
 
-window.addEventListener('DOMContentLoaded', () => {
+export function initSimpleDataTables(idSelector) {
     // Simple-DataTables
     // https://github.com/fiduswriter/Simple-DataTables/wiki
 
-    const datatablesSimple = document.getElementById('datatablesSimple');
+    const datatablesSimple = document.getElementById(idSelector);
     if (datatablesSimple) {
         new DataTable(datatablesSimple);
     }
@@ -23,4 +23,4 @@ window.addEventListener('DOMContentLoaded', () => {
         datatableSelectors.forEach((selector) => selector.classList.add(...classList));    
     })
     
-});
+};

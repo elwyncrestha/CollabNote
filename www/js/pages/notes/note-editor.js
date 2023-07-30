@@ -78,7 +78,9 @@ function configureAutoSave() {
 async function saveChanges() {
   const note = {
     title: document.querySelector(selector.textNoteTitle).value,
-    content: JSON.stringify(quill.getContents())
+    content: JSON.stringify(quill.getContents()),
+    createdAt: new Date(),
+    updatedAt: isUpdate ? new Date() : null
   };
   try {
     await NotesFirebase.addNote(note);

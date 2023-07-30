@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // Monaca
 import '../components/loader';
@@ -9,27 +9,32 @@ import '@fortawesome/fontawesome-free/js/all.min';
 
 // SB Admin
 import './sb-admin';
-import './simple-datatables';
 
 // CollabNote
 import { FirebaseConfig } from './core/config';
 import { RouteGuard } from './core/guards';
-import { Layout } from  './pages/common';
+import { Layout } from './pages/common';
 import { LoginConfig, RegisterConfig, LogoutConfig } from './pages/auth';
-import { ROUTE_CONSTANT } from './core/constants'
+import { ROUTE_CONSTANT } from './core/constants';
 import { AppState } from './core/state';
-import { NoteEditor } from './pages/notes';
+import { NoteEditor, NotesFetcher } from './pages/notes';
 
 AppState.restoreState();
-FirebaseConfig.init();
-RouteGuard.init();
-Layout.default();
 
-const isRegisterPage = RouteGuard.isPageActive(ROUTE_CONSTANT.REGISTER);
-const isLoginPage = RouteGuard.isPageActive(ROUTE_CONSTANT.LOGIN);
-const isCreateNotePage = RouteGuard.isPageActive(ROUTE_CONSTANT.NOTE_EDITOR);
+(async function () {
+  await FirebaseConfig.init();
+  RouteGuard.init();
+  Layout.default();
 
-if (isRegisterPage) RegisterConfig.default();
-if (isLoginPage) LoginConfig.default();
-if (!isRegisterPage && !isLoginPage) LogoutConfig.default();
-if (isCreateNotePage) NoteEditor.initEditor();
+  const isRegisterPage = RouteGuard.isPageActive(ROUTE_CONSTANT.REGISTER);
+  const isLoginPage = RouteGuard.isPageActive(ROUTE_CONSTANT.LOGIN);
+  const isCreateNotePage = RouteGuard.isPageActive(ROUTE_CONSTANT.NOTE_EDITOR);
+  const isViewNotesPage = RouteGuard.isPageActive(ROUTE_CONSTANT.NOTE_LIST);
+  const isDashboard = RouteGuard.isPageActive(ROUTE_CONSTANT.DASHBOARD) || RouteGuard.isPageActive(ROUTE_CONSTANT.DASHBOARD_ALT);
+
+  if (isRegisterPage) RegisterConfig.default();
+  if (isLoginPage) LoginConfig.default();
+  if (!isRegisterPage && !isLoginPage) LogoutConfig.default();
+  if (isCreateNotePage) NoteEditor.initEditor();
+  if (isDashboard || isViewNotesPage) NotesFetcher.fetchNotes('notesTable');
+})();
