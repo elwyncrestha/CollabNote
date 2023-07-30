@@ -45,15 +45,11 @@
                                 <span class="input-group-text">Note Title</span>
                                 <input id="textNoteTitle" type="text" aria-label="Note Title" class="form-control">
                               </div>
-                            <div id="editor">
-                                <p>Hi!</p>
-                                <p>Some initial <strong>contents</strong> here...</p>
-                                <p><br></p>
-                            </div>
+                            <div id="editor"></div>
                         </div>
                         <div class="card-footer">
                             <button id="btnAddNote" class="btn btn-success">Add</button>
-                            <small id="formTextAutoSync" class="form-text d-none"><i class="fas fa-rotate"></i> Changes will be automatically saved.</small>
+                            <small id="formTextAutoSync" class="form-text d-none"><i class="fas fa-rotate"></i> Changes will be automatically saved. Last saved: <span id="spanLastSaved"></span></small>
                         </div>
                     </div>
                 </div>

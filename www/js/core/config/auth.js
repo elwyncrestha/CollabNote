@@ -1,5 +1,5 @@
 ﻿import { AppState } from '../state';
-import { getAuth, signInWithEmailAndPassword, signOut as firebaseSignOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut as firebaseSignOut } from 'firebase/auth';
 
 const { getState } = AppState;
 

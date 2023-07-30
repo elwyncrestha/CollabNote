@@ -2,16 +2,14 @@
 import { ROUTE_CONSTANT } from '../../core/constants';
 import { RoutesController } from '../../core/controller';
 
-const fn = () =>
-  window.addEventListener('DOMContentLoaded', () => {
-    document
-      .querySelector('#btnLogout')
-      .addEventListener('click', function (event) {
-        AuthConfig.signOut()
-          .then(() => {
-            RoutesController.to(ROUTE_CONSTANT.LOGIN);
-          });
+const fn = () => {
+  document
+    .querySelector('#btnLogout')
+    .addEventListener('click', function (event) {
+      AuthConfig.signOut().then(() => {
+        RoutesController.to(ROUTE_CONSTANT.LOGIN);
       });
-  });
+    });
+};
 
 export default fn;

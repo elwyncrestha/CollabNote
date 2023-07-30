@@ -1,6 +1,6 @@
 ﻿import { AuthConfig } from "../../core/config";
 
-const fn = () => window.addEventListener('DOMContentLoaded', () => {
+const fn = () => {
     document.querySelector('#registerUserForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -26,6 +26,6 @@ const fn = () => window.addEventListener('DOMContentLoaded', () => {
                 alertDiv.classList.add('d-block');
             });
     });
-});
+};
 
 export default fn;
