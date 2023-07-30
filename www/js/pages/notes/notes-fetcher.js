@@ -32,6 +32,9 @@ export async function fetchNotes(idSelector) {
       `;
   });
 
+  // TODO: Move this logic to separate Count API.
+  document.querySelector('#countTotalNotes').textContent = notes.length;
+
   tableBody.innerHTML = tableHTML;
   SimpleDataTablesConfig.initSimpleDataTables(idSelector);
   configureDeleteListeners();
