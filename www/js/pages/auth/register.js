@@ -1,5 +1,4 @@
-﻿import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
+﻿import { AuthConfig } from "../../core/config";
 
 const fn = () => window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#registerUserForm').addEventListener('submit', function(event) {
@@ -12,17 +11,13 @@ const fn = () => window.addEventListener('DOMContentLoaded', () => {
         const alertDiv = document.querySelector('#formAlert');
         const alertMessageDiv = document.querySelector('#formAlertMessage');
 
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                /* Signed in */
-                const user = userCredential.user;
+        AuthConfig.signUp(email, password)
+            .then(() => {
                 alertMessageDiv.textContent = 'User registered, Please login!';
                 alertMessageDiv.className = 'alert alert-success';
                 event.target.reset();
             })
-            .catch((error) => {
-                console.error(error);
+            .catch(() => {
                 alertMessageDiv.textContent = 'User registration failed, Please try again!';
                 alertMessageDiv.className = 'alert alert-danger';
             })

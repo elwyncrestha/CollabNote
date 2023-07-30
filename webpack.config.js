@@ -4,8 +4,8 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  // mode: "development",
-  mode: "production",
+  mode: "development",
+  // mode: "production",
   entry: {
     "css/main.min.css": path.resolve(__dirname, "www", "css", "styles.scss"),
     "js/index.js": path.resolve(__dirname, "www", "js", "scripts.js"),
@@ -14,15 +14,15 @@ module.exports = {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "www", "dist"),
   },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new CssMinimizerPlugin(),
-      new TerserPlugin({
-        test: /\.js(\?.*)?$/i,
-      }),
-    ],
-  },
+  // optimization: {
+  //   minimize: true,
+  //   minimizer: [
+  //     new CssMinimizerPlugin(),
+  //     new TerserPlugin({
+  //       test: /\.js(\?.*)?$/i,
+  //     }),
+  //   ],
+  // },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "main.css",

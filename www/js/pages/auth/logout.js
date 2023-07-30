@@ -1,25 +1,17 @@
-﻿import { AppState } from '../../core/state';
-import { getAuth, signOut } from "firebase/auth";
-import { RoutesController } from '../../core/controller';
+﻿import { AuthConfig } from '../../core/config';
 import { ROUTE_CONSTANT } from '../../core/constants';
+import { RoutesController } from '../../core/controller';
 
-const { getState, setState, saveState } = AppState;
-
-const fn = () => window.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#btnLogout').addEventListener('click', function(event) {
-        const auth = getAuth();
-        signOut (auth)
-            .then(() => {
-                const state = getState();
-                state.authToken = null;
-                setState(state);
-                saveState();
-                RoutesController.to(ROUTE_CONSTANT.LOGIN);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    });
-});
+const fn = () =>
+  window.addEventListener('DOMContentLoaded', () => {
+    document
+      .querySelector('#btnLogout')
+      .addEventListener('click', function (event) {
+        AuthConfig.signOut()
+          .then(() => {
+            RoutesController.to(ROUTE_CONSTANT.LOGIN);
+          });
+      });
+  });
 
 export default fn;

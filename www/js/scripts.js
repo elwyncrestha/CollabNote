@@ -18,15 +18,18 @@ import { Layout } from  './pages/common';
 import { LoginConfig, RegisterConfig, LogoutConfig } from './pages/auth';
 import { ROUTE_CONSTANT } from './core/constants'
 import { AppState } from './core/state';
+import { NoteEditor } from './pages/notes';
 
 AppState.restoreState();
-FirebaseConfig.default();
+FirebaseConfig.init();
 RouteGuard.init();
 Layout.default();
 
-const isRegisterActive = RouteGuard.isPageActive(ROUTE_CONSTANT.REGISTER);
-const isLoginActive = RouteGuard.isPageActive(ROUTE_CONSTANT.LOGIN);
+const isRegisterPage = RouteGuard.isPageActive(ROUTE_CONSTANT.REGISTER);
+const isLoginPage = RouteGuard.isPageActive(ROUTE_CONSTANT.LOGIN);
+const isCreateNotePage = RouteGuard.isPageActive(ROUTE_CONSTANT.NOTE_EDITOR);
 
-if (isRegisterActive) RegisterConfig.default();
-if (isLoginActive) LoginConfig.default();
-if (!isRegisterActive && !isLoginActive) LogoutConfig.default();
+if (isRegisterPage) RegisterConfig.default();
+if (isLoginPage) LoginConfig.default();
+if (!isRegisterPage && !isLoginPage) LogoutConfig.default();
+if (isCreateNotePage) NoteEditor.initEditor();
