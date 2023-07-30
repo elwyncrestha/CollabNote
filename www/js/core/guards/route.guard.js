@@ -18,6 +18,9 @@ function isCheckRequired() {
   return currentPage !== LOGIN && currentPage !== REGISTER;
 }
 
+/**
+ * Routes to specific page based on the auth status.
+ */
 export function init() {
   if (!AuthConfig.isAuthenticated()) {
     if (isCheckRequired()) {

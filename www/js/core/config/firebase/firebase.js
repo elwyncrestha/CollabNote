@@ -6,6 +6,9 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const { updateState, saveState } = AppState;
 
+/**
+ * Ref: [XMLHttpRequest - Web APIs | MDN (mozilla.org)](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
+ */
 function fetchFirebaseConfig() {
   return new Promise((resolve, reject) => {
     // Uses private Postman mock server to fetch the config dynamically.
@@ -50,6 +53,9 @@ function fetchFirebaseConfig() {
   });
 }
 
+/**
+ * [Manage Users in Firebase](https://firebase.google.com/docs/auth/web/manage-users)
+ */
 export function initAuthStateSubscription() {
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {

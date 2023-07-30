@@ -26,6 +26,9 @@ const isUpdate = !!id;
 
 let quill;
 
+/**
+ * [Configuration - Quill Rich Text Editor](https://quilljs.com/docs/configuration/)
+ */
 export async function initEditor() {
   quill = new Quill('#editor', config);
   if (isUpdate) {
@@ -58,6 +61,9 @@ function configureAddListener() {
     .addEventListener('click', saveChanges);
 }
 
+/**
+ * [Interactive Playground - Quill Rich Text Editor](https://quilljs.com/playground/#autosave)
+ */
 function configureAutoSave() {
   const Delta = Quill.import('delta');
 

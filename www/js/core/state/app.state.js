@@ -1,7 +1,13 @@
-﻿import { APP_CONSTANT } from '../constants';
+﻿/**
+ * This file will handle all logics related to the app state.
+ */
+import { APP_CONSTANT } from '../constants';
 
 const { APP_STATE_KEY } = APP_CONSTANT;
 
+/**
+ * Initial app state.
+ */
 const CollabNoteState = {
   authUser: null,
   firebaseApp: null,
@@ -9,6 +15,10 @@ const CollabNoteState = {
   firestore: null,
 };
 
+/**
+ * Return in-memory app state.
+ * @returns App state.
+ */
 function getState() {
   // TODO: App state temporarily stored in the window object.
   if (!window.CollabNoteState) {
@@ -18,10 +28,19 @@ function getState() {
   return window.CollabNoteState;
 }
 
+/**
+ * Sets the app state into the in-memory. Temporarily relying on `window` object.
+ * @param state State object.
+ */
 function setState(state) {
   window.CollabNoteState = { ...state };
 }
 
+/**
+ * Updates the app state based on the state parameter.
+ * Usage: Just use `updateState` instead of using `getState` and `setState` consecutively.
+ * @param updatedState State object with updated state keys and values.
+ */
 function updateState(updatedState) {
   const state = getState();
   setState({ ...state, ...updatedState });
@@ -29,6 +48,9 @@ function updateState(updatedState) {
 
 const serializableStateKeys = ['authUser'];
 
+/**
+ * Serializes the app state into the `localStorage`.
+ */
 function saveState() {
   const serialize = {};
   const state = getState();
@@ -37,6 +59,9 @@ function saveState() {
   localStorage.setItem(APP_STATE_KEY, JSON.stringify(serialize));
 }
 
+/**
+ * Deserializes/Restores the app state from the `localStorage`.
+ */
 function restoreState() {
   const deserialize = localStorage.getItem(APP_STATE_KEY);
   if (!deserialize) {
