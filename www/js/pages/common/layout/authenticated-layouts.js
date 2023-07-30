@@ -1,3 +1,5 @@
+import { AppState } from '../../../core/state';
+
 const navbarLayout = `
   <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
@@ -57,13 +59,16 @@ const sidenavLayout = `
   </div>
   <div class="sb-sidenav-footer">
       <div class="small">Logged in as:</div>
-      Start Bootstrap
+      <span id="spanAuthUser">john@gmail.com</span>
   </div>
   </nav>
 `;
 
-const initSidenav = () =>
-    (document.querySelector("#layoutSidenav_nav").innerHTML += sidenavLayout);
+const initSidenav = () => {
+  document.querySelector('#layoutSidenav_nav').innerHTML += sidenavLayout;
+  const authUserEmail = AppState.getState().authUser?.email;
+  document.querySelector('#spanAuthUser').textContent = authUserEmail;
+};
 
 const footerLayout = `
   <footer class="py-4 bg-light mt-auto">
@@ -81,8 +86,8 @@ const footerLayout = `
 `;
 
 const initFooter = () => {
-  document.querySelector("#layoutSidenav_content").innerHTML += footerLayout;
-  const footerDate = document.body.querySelector("#footerDate");
+  document.querySelector('#layoutSidenav_content').innerHTML += footerLayout;
+  const footerDate = document.body.querySelector('#footerDate');
   footerDate.textContent = new Date().getFullYear().toString();
 };
 
@@ -91,7 +96,7 @@ const removeSpinner = () => {
   const classList = document.querySelector('#layoutSidenav').classList;
   classList.remove('d-none');
   classList.add('d-flex');
-}
+};
 
 const init = () => {
   initNavbar();
