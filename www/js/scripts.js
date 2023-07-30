@@ -8,7 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import '@fortawesome/fontawesome-free/js/all.min';
 
 // SB Admin
-import './sb-admin';
+import { configureSidenavToggle } from './sb-admin';
 
 // CollabNote
 import { FirebaseConfig } from './core/config';
@@ -25,6 +25,7 @@ AppState.restoreState();
   await FirebaseConfig.init();
   RouteGuard.init();
   Layout.default();
+  configureSidenavToggle();
 
   const isRegisterPage = RouteGuard.isPageActive(ROUTE_CONSTANT.REGISTER);
   const isLoginPage = RouteGuard.isPageActive(ROUTE_CONSTANT.LOGIN);
