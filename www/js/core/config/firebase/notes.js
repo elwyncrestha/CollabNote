@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, getDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { AppState } from "../../state";
 
 export async function addNote(note) {
@@ -36,6 +36,16 @@ export async function getNote(id) {
     const { firestore: db, authUser } = AppState.getState();
     const userNoteRef = doc(db, 'users', authUser.uid, 'notes', id);
     return await getDoc(userNoteRef);
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deleteNote(id) {
+  try {
+    const { firestore: db, authUser } = AppState.getState();
+    const userNoteRef = doc(db, 'users', authUser.uid, 'notes', id);
+    return await deleteDoc(userNoteRef);
   } catch (error) {
     throw error;
   }
